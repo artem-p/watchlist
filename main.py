@@ -1,7 +1,1 @@
-import yfinance as yf
-
-msft = yf.Ticker('AAPL')
-
-info = msft.info
-
-print(info)
+from secret import API_KEY
