@@ -1,7 +1,6 @@
 import requests
 
 from secret import API_KEY
+import requester
 
-r = requests.get('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=SPY&apikey=' + API_KEY)
-
-print(r.json())
+print(requester.global_quote("MSFT"))
