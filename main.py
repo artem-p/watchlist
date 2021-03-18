@@ -7,11 +7,13 @@ import requester
 
 SPY = requester.global_quote('SPY')
 
-print(SPY['price'])
+spy_price = SPY['price'].strip('0')
+spy_text = f"SPY: {spy_price}"
+print(spy_text)
+
 
 def start(update, context):
-
-    context.bot.send_message(chat_id=update.effective_chat.id, text=f"SPX: {SPY['price'].strip('0')}")
+    context.bot.send_message(chat_id=update.effective_chat.id, text=spy_text)
 
 updater = Updater(token=TOKEN, use_context=True)
 
