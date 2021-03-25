@@ -24,8 +24,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 dispatcher.bot.send_message(chat_id='@marketwatchdaily', text=spy_text)
 
-start_handler = CommandHandler('start', start)
-dispatcher.add_handler(start_handler)
+# start_handler = CommandHandler('start', start)
+# dispatcher.add_handler(start_handler)
 
-updater.start_polling()
-updater.idle()
+# updater.start_polling()
+# updater.idle()
