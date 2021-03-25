@@ -5,11 +5,19 @@ import logging
 from secret import API_KEY, TOKEN
 import requester
 
-SPY = requester.global_quote('SPY')
+def get_single_quote_text(quote):
+    symbol = quote['symbol']
+    price = quote['price'].strip('0')
+    
+    return f"{symbol}: {price}"
 
-spy_price = SPY['price'].strip('0')
-spy_text = f"SPY: {spy_price}"
+
+SPY = requester.global_quote('SPY')
+QQQ = requester.global_quote('QQQ')
+
+spy_text = get_single_quote_text(SPY)
 print(spy_text)
+
 
 
 def start(update, context):

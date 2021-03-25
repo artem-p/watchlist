@@ -8,6 +8,8 @@ def global_quote(ticker):
     request = requests.get(query)
 
     if request.status_code == 200:
-        quote['price'] = request.json()['Global Quote']['05. price']
+        response = request.json()
+        quote['symbol'] = response['Global Quote']['01. symbol']
+        quote['price'] = response['Global Quote']['05. price']
 
     return quote
