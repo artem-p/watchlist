@@ -5,6 +5,7 @@ import logging
 from secret import API_KEY, TOKEN
 import requester
 
+
 def get_single_quote_text(quote):
     symbol = None
     price = None
@@ -12,10 +13,9 @@ def get_single_quote_text(quote):
         symbol = quote['symbol']
     
     if 'price' in quote:
-        price = quote['price'].strip('0')
+        price = '{0:.2f}'.format(float(quote['price']))
     
     return f"{symbol}: {price}"
-
 
 SPY = requester.global_quote('SPY')
 QQQ = requester.global_quote('QQQ')
