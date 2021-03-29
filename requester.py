@@ -12,5 +12,7 @@ def global_quote(ticker):
         if 'Global Quote' in response:
             quote['symbol'] = response['Global Quote']['01. symbol']
             quote['price'] = response['Global Quote']['05. price']
+            quote['change'] = response['Global Quote']['09. change']
+            quote['change_percent'] = response['Global Quote']['10. change percent']
 
     return quote

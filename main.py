@@ -9,13 +9,22 @@ import requester
 def get_single_quote_text(quote):
     symbol = None
     price = None
+    change = None
+    change_percent = None
     if 'symbol' in quote:
         symbol = quote['symbol']
     
     if 'price' in quote:
         price = '{0:.2f}'.format(float(quote['price']))
     
-    return f"{symbol}: {price}"
+    if 'change' in quote:
+        change = '{0:.2f}'.format(float(quote['change']))
+    
+    if 'change_percent' in quote:
+        change_percent = '{0:.2f}'.format(float(quote['change_percent'][:-1]))
+    
+    return f"{symbol}: {price} {change} {change_percent}%"
+
 
 SPY = requester.global_quote('SPY')
 QQQ = requester.global_quote('QQQ')
