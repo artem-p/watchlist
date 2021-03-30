@@ -4,6 +4,7 @@ import logging
 
 from secret import API_KEY, TOKEN
 import requester
+import plotly.graph_objects as graph_objects
 
 
 def get_single_quote_text(quote):
@@ -38,6 +39,12 @@ output_text = f"""
 """
 print(output_text)
 
+
+fig = graph_objects.Figure(data=[graph_objects.Table(header=dict(values=['A Scores', 'B Scores']),
+                 cells=dict(values=[[100, 90, 80, 90], [95, 85, 75, 95]]))
+                     ])
+                     
+fig.write_image('output.png')
 
 
 def start(update, context):
