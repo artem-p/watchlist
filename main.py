@@ -7,11 +7,12 @@ import requester
 import plotly.graph_objects as graph_objects
 
 
-def get_single_quote_text(quote):
+def format_quote(quote):
     symbol = None
     price = None
     change = None
     change_percent = None
+
     if 'symbol' in quote:
         symbol = quote['symbol']
     
@@ -23,8 +24,15 @@ def get_single_quote_text(quote):
     
     if 'change_percent' in quote:
         change_percent = '{0:.2f}'.format(float(quote['change_percent'][:-1]))
-    
-    return f"{symbol}: {price} {change} {change_percent}%"
+
+    return {'symbol': symbol, 'price': price, 'change': change, 'change_percent': change_percent} 
+
+
+def get_single_quote_text(quote):
+    formatted_quote = format_quote(quote)
+
+    return f"{formatted_quote['symbol']}: {formatted_quote['price']} {formatted_quote['change']} {formatted_quote['change_percent']}%"
+
 
 
 SPY = requester.global_quote('SPY')
