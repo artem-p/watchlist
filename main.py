@@ -43,8 +43,8 @@ print(output_text)
 fig = graph_objects.Figure(data=[graph_objects.Table(header=dict(values=['A Scores', 'B Scores']),
                  cells=dict(values=[[100, 90, 80, 90], [95, 85, 75, 95]]))
                      ])
-                     
-fig.write_image('output.png')
+
+fig.write_image('output.png', width=1000, height=1000, scale=2)
 
 
 def start(update, context):
