@@ -61,17 +61,22 @@ def send_message(output_text):
     dispatcher.bot.send_message(chat_id='@marketwatchdaily', text=text_output)
 
 
-SPY = requester.global_quote('SPY')
-QQQ = requester.global_quote('QQQ')
-
-text_output = get_output_text(SPY, QQQ)
-
-fig = graph_objects.Figure(data=[graph_objects.Table(header=dict(values=['A Scores', 'B Scores']),
+def write_image(SPY, QQQ):
+    fig = graph_objects.Figure(data=[graph_objects.Table(header=dict(values=['A Scores', 'B Scores']),
                  cells=dict(values=[[100, 90, 80, 90], [95, 85, 75, 95]]))
                      ])
 
-fig.write_image('output.png', width=1000, height=1000, scale=2)
+    fig.write_image('output.png', width=1000, height=1000, scale=2)
 
-send_message(text_output)
+
+if __name__=='__main__':
+    SPY = requester.global_quote('SPY')
+    QQQ = requester.global_quote('QQQ')
+
+    text_output = get_output_text(SPY, QQQ)
+
+
+    send_message(text_output)
+    write_image(SPY, QQQ)
 
 
