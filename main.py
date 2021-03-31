@@ -39,12 +39,27 @@ def get_output_text(SPY, QQQ):
     qqq_text = get_single_quote_text(QQQ)
 
     output_text = f"""
-    {spy_text}
-    {qqq_text}
+{spy_text}
+{qqq_text}
     """
     print(output_text)
 
     return output_text
+
+
+def send_message(output_text):
+    # def start(update, context):
+    #     context.bot.send_message(chat_id=update.effective_chat.id, text=text_output)
+
+    updater = Updater(token=TOKEN, use_context=True)
+
+    dispatcher = updater.dispatcher
+
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        level=logging.INFO)
+
+    dispatcher.bot.send_message(chat_id='@marketwatchdaily', text=text_output)
+
 
 SPY = requester.global_quote('SPY')
 QQQ = requester.global_quote('QQQ')
@@ -57,16 +72,6 @@ fig = graph_objects.Figure(data=[graph_objects.Table(header=dict(values=['A Scor
 
 fig.write_image('output.png', width=1000, height=1000, scale=2)
 
+send_message(text_output)
 
-def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text=text_output)
-
-updater = Updater(token=TOKEN, use_context=True)
-
-dispatcher = updater.dispatcher
-
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
-
-dispatcher.bot.send_message(chat_id='@marketwatchdaily', text=text_output)
 
