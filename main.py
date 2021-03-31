@@ -34,19 +34,22 @@ def get_single_quote_text(quote):
     return f"{formatted_quote['symbol']}: {formatted_quote['price']} {formatted_quote['change']} {formatted_quote['change_percent']}%"
 
 
+def get_output_text(SPY, QQQ):
+    spy_text = get_single_quote_text(SPY)
+    qqq_text = get_single_quote_text(QQQ)
+
+    output_text = f"""
+    {spy_text}
+    {qqq_text}
+    """
+    print(output_text)
+
+    return output_text
 
 SPY = requester.global_quote('SPY')
 QQQ = requester.global_quote('QQQ')
 
-spy_text = get_single_quote_text(SPY)
-qqq_text = get_single_quote_text(QQQ)
-
-output_text = f"""
-{spy_text}
-{qqq_text}
-"""
-print(output_text)
-
+text_output = get_output_text(SPY, QQQ)
 
 fig = graph_objects.Figure(data=[graph_objects.Table(header=dict(values=['A Scores', 'B Scores']),
                  cells=dict(values=[[100, 90, 80, 90], [95, 85, 75, 95]]))
@@ -56,7 +59,7 @@ fig.write_image('output.png', width=1000, height=1000, scale=2)
 
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text=spy_text)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=text_output)
 
 updater = Updater(token=TOKEN, use_context=True)
 
@@ -65,10 +68,5 @@ dispatcher = updater.dispatcher
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
-dispatcher.bot.send_message(chat_id='@marketwatchdaily', text=output_text)
+dispatcher.bot.send_message(chat_id='@marketwatchdaily', text=text_output)
 
-# start_handler = CommandHandler('start', start)
-# dispatcher.add_handler(start_handler)
-
-# updater.start_polling()
-# updater.idle()
