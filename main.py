@@ -62,9 +62,13 @@ def send_message(output_text):
 
 
 def write_image(SPY, QQQ):
-    fig = graph_objects.Figure(data=[graph_objects.Table(header=dict(values=['A Scores', 'B Scores']),
+    fig = graph_objects.Figure(data=[graph_objects.Table(header=dict(values=['', 'Price', 'Change', 'Change%']),
                  cells=dict(values=[[100, 90, 80, 90], [95, 85, 75, 95]]))
                      ])
+
+    spy_formatted = format_quote(SPY)
+    qqq_formatted = format_quote(QQQ)
+
 
     fig.write_image('output.png', width=1000, height=1000, scale=2)
 
