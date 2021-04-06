@@ -75,6 +75,13 @@ def write_image(SPY, QQQ):
 
     fig.write_image('output.png', width=1000, height=1000, scale=2)
 
+def send_image():
+    updater = Updater(token=TOKEN, use_context=True)
+
+    dispatcher = updater.dispatcher
+
+    dispatcher.bot.send_photo(chat_id='@marketwatchdaily', photo=open('output.png', 'rb'))
+
 
 if __name__=='__main__':
     SPY = requester.global_quote('SPY')
@@ -84,6 +91,8 @@ if __name__=='__main__':
 
 
     send_message(text_output)
+    
     write_image(SPY, QQQ)
+    send_image()
 
 
