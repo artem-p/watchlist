@@ -92,7 +92,7 @@ if __name__=='__main__':
 
     send_message(text_output)
     
-    write_image(SPY, QQQ)
-    send_image()
+    # write_image(SPY, QQQ)
+    # send_image()
 
 
